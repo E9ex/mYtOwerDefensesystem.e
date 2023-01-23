@@ -6,8 +6,8 @@ using UnityEngine;
 public class Buildmanager : MonoBehaviour
 {
 
-    //referans olmadan bağlama çok fazla yapmamız gerekiyor yoksa/ singleton pattern
-    
+    //referans olmadan bağlama çok fazla yapmamız gerekiyor yoksa hepsine teker teker atamamız gerekiyor./ singleton pattern
+
     public static Buildmanager instance;
 
     private void Awake()
@@ -16,17 +16,23 @@ public class Buildmanager : MonoBehaviour
     }
 
     public GameObject standardturretprefab;
+    public GameObject missilelauncherprefab;
 
-    private void Start()
+    private turretblueprint turretToBuild;
+
+    public bool canbuild
     {
-        turretToBuild = standardturretprefab;
+        get { return turretToBuild != null; }
+    } // property.
+
+    public void buildturreton(node _node)
+    {
+       GameObject turret=(GameObject) Instantiate(turretToBuild.prefab, _node.getbuildposition(), Quaternion.identity);
+       _node.turret = turret;
     }
 
-    private GameObject turretToBuild;
-
-    public GameObject getturrettobuild()
+    public void selectturrettobuild(turretblueprint turret)
     {
-        return turretToBuild;
+        turretToBuild = turret;
     }
-
 }

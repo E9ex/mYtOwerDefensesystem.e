@@ -71,6 +71,7 @@ public class turret : MonoBehaviour
         }
 
         fireCountdown -= Time.deltaTime;
+        
     }
 
     void Shoot()
