@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class node : MonoBehaviour
 {
     public Color hovercolor;
+    public Color notenoughmoney=Color.red;
     public Vector3 positionoffset;
     
     [Header("optional")]
@@ -44,7 +45,7 @@ public class node : MonoBehaviour
         }
 
         Buildmanager.instance.buildturreton(this);
-    }//dk 16 / 11.bölüm
+    }
 
     private void OnMouseEnter()
     {
@@ -56,7 +57,17 @@ public class node : MonoBehaviour
         {
             return;
         }
-        rend.material.color = hovercolor;
+
+        if (_Buildmanager.Hasmoney)
+        {
+            rend.material.color = hovercolor;
+
+        }
+        else
+        {
+            rend.material.color = notenoughmoney;
+        }
+        
         
     }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Buildmanager : MonoBehaviour
@@ -15,24 +16,41 @@ public class Buildmanager : MonoBehaviour
         instance = this;
     }
 
-    public GameObject standardturretprefab;
-    public GameObject missilelauncherprefab;
+   
 
     private turretblueprint turretToBuild;
+    public GameObject buildeffect;
 
     public bool canbuild
     {
         get { return turretToBuild != null; }
     } // property.
 
+    public bool Hasmoney
+    {
+        get { return playerstats.Money >= turretToBuild.cost; }
+    }
+
     public void buildturreton(node _node)
     {
+        if (playerstats.Money<turretToBuild.cost)
+        {
+            Debug.Log("not enough money to build that.");
+            return;
+        }
+
+        playerstats.Money -= turretToBuild.cost;
        GameObject turret=(GameObject) Instantiate(turretToBuild.prefab, _node.getbuildposition(), Quaternion.identity);
        _node.turret = turret;
+       GameObject effect=(GameObject)Instantiate(buildeffect, _node.getbuildposition(), Quaternion.identity);
+       Destroy(effect, 5f);
+       Debug.Log("turret build money left:"+playerstats.Money);
+       
     }
 
     public void selectturrettobuild(turretblueprint turret)
     {
         turretToBuild = turret;
     }
+    
 }

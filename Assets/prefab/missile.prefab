@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e701affa358d844c285a136b714a8271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  daamage: 150
   speed: 30
   impacteffect: {fileID: 7560013535110813859, guid: ab15a926d428a458a9b8d1b4ef2e5f4d, type: 3}
   explosionradius: 10
