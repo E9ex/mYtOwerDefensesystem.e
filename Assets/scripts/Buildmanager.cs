@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Buildmanager : MonoBehaviour
@@ -20,7 +21,8 @@ public class Buildmanager : MonoBehaviour
 
     private turretblueprint turretToBuild;
     public GameObject buildeffect;
-
+    private node selectednode;
+    public nodeuı Nodeıu;
     public bool canbuild
     {
         get { return turretToBuild != null; }
@@ -48,9 +50,18 @@ public class Buildmanager : MonoBehaviour
        
     }
 
+    public void selectnode(node _node)//e18/17:46
+    {
+        selectednode = _node;
+        turretToBuild = null;
+        Nodeıu.settarget(selectednode);
+       
+    }
+
     public void selectturrettobuild(turretblueprint turret)
     {
         turretToBuild = turret;
+        selectednode = null;
     }
     
 }

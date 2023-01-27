@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,14 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class gamemanager : MonoBehaviour
 {
-    private bool gameended = false;
+    public static bool gameisover = false;
+    public GameObject gameoveruı;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        gameisover = false;
+    }
+
     void Update()
     {
-        if (gameended)
+        if (gameisover)
         {
             return;
+        }
+
+        if (Input.GetKeyDown("b"))
+            
+        {
+            Endgame();
         }
         if (playerstats.lives<=0)
         {
@@ -23,8 +35,8 @@ public class gamemanager : MonoBehaviour
     void Endgame()
 
     {
-        gameended = true;
-        Debug.Log("game over ");
+        gameisover = true;
+        gameoveruı.SetActive(true);
         
     }
     

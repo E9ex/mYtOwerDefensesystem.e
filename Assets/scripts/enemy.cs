@@ -2,59 +2,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+ using UnityEngine.Serialization;
 
-public class enemy : MonoBehaviour
+ public class enemy : MonoBehaviour
 {
+   public float  startspeed=10f;
+   [HideInInspector]
     public float speed = 10f;
-    public int health = 100;
-    public int value = 50;
-        private Transform target;
-    private int wavepointIndex = 0;
+    
+    
+    public float health = 100;
+    public int worth = 50;
+
 
     private void Start()
     {
-        target = waypoints.points[0];
+        speed = startspeed;
     }
 
-    public void Takedamage(int amount)
+    public void Takedamage(float amount)
     {
         health -= amount;
         if (health <= 0)
             die();
     }
 
+    
+    public void slow(float pct)
+    {
+        speed = startspeed * (1f - pct);
+    }
+
     void die()
     {
-        playerstats.Money += value;
+        playerstats.Money += worth;
         Destroy(gameObject);
     }
-    private void Update()
-    {
-        Vector3 dir = target.position - transform.position;
-        transform.Translate(dir.normalized* speed * Time.deltaTime,Space.World);
-        if (Vector3.Distance(transform.position,target.position)<=0.4f)
-        {
-            getnextwaypoint();
-        }
-    }
-
-    void getnextwaypoint()
-    {
-        if (wavepointIndex>=waypoints.points.Length-1)
-            
-        {
-            Endpath();
-            return;
-        }
-        wavepointIndex++;
-        target = waypoints.points[wavepointIndex];
-        
-    }
-
-    void Endpath()
-    {
-        playerstats.lives--;
-        Destroy(gameObject);
-
-    }
+    
 }

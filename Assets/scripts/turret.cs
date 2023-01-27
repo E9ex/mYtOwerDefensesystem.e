@@ -7,6 +7,7 @@ using UnityEngine;
 public class turret : MonoBehaviour
 {
     public Transform target;
+    private enemy targetenemy;
 
     [Header("general")]
    
@@ -19,7 +20,11 @@ public class turret : MonoBehaviour
     [Header("use laser (default)")] 
     public bool uselaser = false;
 
+    public float slowamount = .5f;
+    public int Damageovertime = 30;
     public LineRenderer lineRenderer;
+    public ParticleSystem impacteffect;
+    public Light impactlight;
     
     [Header("unity setup fields")]
     public Transform PartToRotate;
@@ -52,6 +57,7 @@ public class turret : MonoBehaviour
         if (nearestEnemy!=null&& shortestdistance<=range)
         {
             target = nearestEnemy.transform;
+            targetenemy = nearestEnemy.GetComponent<enemy>();
         }
         else
         {
@@ -65,17 +71,36 @@ public class turret : MonoBehaviour
     {
         if (target==null)
         {
+            if (uselaser)
+            {
+
+                if (lineRenderer.enabled)
+                {
+                    lineRenderer.enabled = false;
+                    impacteffect.Stop();
+                    impactlight.enabled = false;
+                }
+            }
+            
             return; }
         //target lock on.
         lockontarget();
-        
-        if (fireCountdown<=0f)
+        if (uselaser)
         {
-            Shoot();
-            fireCountdown = 1f / fireRate;
-        }//e14 
+            laser();
+        }
+        else
+        {
+            if (fireCountdown<=0f)
+            {
+                Shoot();
+                fireCountdown = 1f / fireRate;
+            }
 
-        fireCountdown -= Time.deltaTime;
+            fireCountdown -= Time.deltaTime;
+        }
+        
+        
         
     }
 
@@ -86,6 +111,26 @@ public class turret : MonoBehaviour
         Vector3 rotation = Quaternion.Lerp(PartToRotate.rotation,lookRotation,Time.deltaTime*turnspeed).eulerAngles;
         PartToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
     }
+
+    void laser()
+    {
+        targetenemy.Takedamage(Damageovertime*Time.deltaTime);
+        targetenemy.slow(slowamount);
+        if (!lineRenderer.enabled)
+        {//e17 tekrar izle 18.29
+            lineRenderer.enabled = true;
+            impacteffect.Play();
+            impactlight.enabled = true;
+        }
+        lineRenderer.SetPosition(0,firepoint.position);
+        lineRenderer.SetPosition(1,target.position);
+        Vector3 dir = firepoint.position - target.position;//b-a ::
+        impacteffect.transform.position = target.position+dir.normalized;
+        impacteffect.transform.rotation = Quaternion.LookRotation(dir); //yönü o tarafa çekmesini sağlıyor.
+    }
+
+    
+    
 
     void Shoot()
     {
