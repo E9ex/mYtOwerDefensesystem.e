@@ -7,7 +7,7 @@ public class cameracontrroler : MonoBehaviour
 {
     public float panborderthickness = 10f;
     public float panspeed = 30f;
-    private bool domovement = true;
+   
     public float scrollspeed = 5f;
     public float minY = 10f;
     public float maxY = 80f;
@@ -19,14 +19,7 @@ public class cameracontrroler : MonoBehaviour
             this.enabled = false;
             return;
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            domovement = !domovement;
-        }
-        if (!domovement)
-        {
-            return;
-        }
+        
         if (Input.GetKey("w") || Input.mousePosition.y >= Screen.height - panborderthickness) 
         {
 

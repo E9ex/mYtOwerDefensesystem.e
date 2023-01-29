@@ -21,7 +21,7 @@ public class gameover : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void menu()
+    public void menu()//9.13 minute. e22
     {
         Debug.Log("go to menu");
     }

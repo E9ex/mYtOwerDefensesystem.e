@@ -20,6 +20,7 @@ public class Buildmanager : MonoBehaviour
    
 
     private turretblueprint turretToBuild;
+    public GameObject selleffect;
     public GameObject buildeffect;
     private node selectednode;
     public nodeuı Nodeıu;
@@ -33,35 +34,37 @@ public class Buildmanager : MonoBehaviour
         get { return playerstats.Money >= turretToBuild.cost; }
     }
 
-    public void buildturreton(node _node)
-    {
-        if (playerstats.Money<turretToBuild.cost)
-        {
-            Debug.Log("not enough money to build that.");
-            return;
-        }
-
-        playerstats.Money -= turretToBuild.cost;
-       GameObject turret=(GameObject) Instantiate(turretToBuild.prefab, _node.getbuildposition(), Quaternion.identity);
-       _node.turret = turret;
-       GameObject effect=(GameObject)Instantiate(buildeffect, _node.getbuildposition(), Quaternion.identity);
-       Destroy(effect, 5f);
-       Debug.Log("turret build money left:"+playerstats.Money);
-       
-    }
+    
 
     public void selectnode(node _node)//e18/17:46
     {
+        if (selectednode==_node)
+        {
+            deselectnode();
+            return;
+        }
         selectednode = _node;
         turretToBuild = null;
+        
         Nodeıu.settarget(selectednode);
        
+    }
+
+    public void deselectnode()
+    {
+        selectednode = null;
+        Nodeıu.hide();
     }
 
     public void selectturrettobuild(turretblueprint turret)
     {
         turretToBuild = turret;
-        selectednode = null;
+        deselectnode();
     }
-    
+
+    public turretblueprint getTurretTobuild()
+    {
+        return turretToBuild;
+    }
+
 }
