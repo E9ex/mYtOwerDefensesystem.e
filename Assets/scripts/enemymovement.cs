@@ -45,6 +45,7 @@ public class enemymovement : MonoBehaviour
         void Endpath()
         {
             playerstats.lives--;
+            wavespawner.enemiesalive--;
             Destroy(gameObject);
 
         }

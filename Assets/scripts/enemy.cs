@@ -36,7 +36,9 @@ using UnityEngine;
     void die()
     {
         playerstats.Money += worth;
+        wavespawner.enemiesalive--;
         Destroy(gameObject);
+    
     }
     
 }

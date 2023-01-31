@@ -3010,9 +3010,9 @@ MonoBehaviour:
   - enemy: {fileID: 5689878763221837456, guid: 91e9ee68025694adf9591eb27ee1cd71, type: 3}
     count: 2
     rate: 2
-  - enemy: {fileID: 5689878763221837456, guid: 4832d7a7241594b7da8ac813598932d9, type: 3}
-    count: 15
-    rate: 4
+  - enemy: {fileID: 5689878763221837456, guid: 91e9ee68025694adf9591eb27ee1cd71, type: 3}
+    count: 5
+    rate: 2
   - enemy: {fileID: 5689878763221837456, guid: 5c0d4ac3b5cb74702a1f23cd2f3aa6f9, type: 3}
     count: 3
     rate: 1
@@ -3064,8 +3064,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a8dc43b3328489aaf6a458b3aeedeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startmoney: 300
-  startlives: 10
+  startmoney: 400
+  startlives: 1
 --- !u!114 &302186248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17818,7 +17818,7 @@ RectTransform:
   m_GameObject: {fileID: 1731911351}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1986933386}
@@ -17829,8 +17829,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 84.30292}
-  m_SizeDelta: {x: 0, y: 168.6069}
+  m_AnchoredPosition: {x: 0, y: 89.336365}
+  m_SizeDelta: {x: 0, y: 178.6738}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1731911353
 MonoBehaviour:
