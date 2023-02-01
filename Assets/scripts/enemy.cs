@@ -13,7 +13,7 @@ using UnityEngine;
     
     public float health = 100;
     public int worth = 50;
-
+    private bool isdead = false;
 
     private void Start()
     {
@@ -23,7 +23,7 @@ using UnityEngine;
     public void Takedamage(float amount)
     {
         health -= amount;
-        if (health <= 0)
+        if (health <= 0&& !isdead)
             die();
     }
 
@@ -35,6 +35,8 @@ using UnityEngine;
 
     void die()
     {
+        isdead = true;
+        
         playerstats.Money += worth;
         wavespawner.enemiesalive--;
         Destroy(gameObject);

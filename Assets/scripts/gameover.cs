@@ -9,20 +9,18 @@ using UnityEngine.SceneManagement;
 
 public class gameover : MonoBehaviour
 {
-    public TextMeshProUGUI roundsText;
+  
+    public string menuscenename = "Mainmenu";
 
-    private void OnEnable() //every time object get enabled.
-    {
-        roundsText.text = playerstats.rounds.ToString();
-    }
+    
 
     public void retry()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void menu()//9.13 minute. e22
+    public void menu()
     {
-        Debug.Log("go to menu");
+        SceneManager.LoadScene(menuscenename);
     }
 }
